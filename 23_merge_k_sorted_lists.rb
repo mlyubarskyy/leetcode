@@ -9,6 +9,10 @@
 
 # @param {ListNode[]} lists
 # @return {ListNode}
+
+# Time complexity : O(N log k) where `k` is the number of linked lists
+# Space complexity : O(1)
+
 def merge_k_lists(lists)
   len = lists.size
   if len == 0

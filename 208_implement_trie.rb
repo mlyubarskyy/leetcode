@@ -44,8 +44,38 @@ class Trie
   end
 end
 
-# Your Trie object will be instantiated and called as such:
- #obj = Trie.new()
- #obj.insert('apple')
- #param_2 = obj.search('apple')
- #param_3 = obj.starts_with('app')
+
+class Trie
+  WORD_KEY = '$'.freeze
+
+  def initialize
+    @root = {}
+  end
+
+  def insert(word)
+    node = @root
+    word.each_char do |ch|
+      node = node[ch] ||= {}
+    end
+    node[WORD_KEY] = word
+  end
+
+  def search(word)
+    get_deepest_node_for(word)&.has_key?(WORD_KEY) || false
+  end
+
+  def starts_with(prefix)
+    !get_deepest_node_for(prefix).nil?
+  end
+
+  private
+
+  def get_deepest_node_for(prefix)
+    node = @root
+    prefix.each_char do |ch|
+      node = node[ch]
+      return nil if !node
+    end
+    node
+  end
+end
