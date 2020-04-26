@@ -11,16 +11,12 @@
 # @return {Void} Do not return anything, modify head in-place instead.
 def reorder_list(head)
   return head if !head
+
   node = head
   s = []
-
-  while node
-    t = node.dup
-    t.next = nil
-    s << t
-    node=node.next
+  while node = node.next
+    s << ListNode.new(node.val)
   end
-  s.shift
 
   node = head
   i = 1
